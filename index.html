@@ -175,55 +175,7 @@
                     <li><i class="fas fa-certificate"></i> Bebas Penyakit & Cukup Umur</li>
                     <li><i class="fas fa-truck"></i> Gratis Ongkir & Biaya Rawat</li>
                 </ul>
-                let produkTerpilih = "";
-let hargaTerpilih = 0;
-
-// Fungsi saat tombol "Pesan" di Card diklik
-function pesanWA(nama, harga) {
-    produkTerpilih = nama;
-    hargaTerpilih = harga;
-    
-    // Munculkan teks info produk di modal
-    document.getElementById('infoProduk').innerText = "Produk: " + nama;
-    // Tampilkan Modal
-    document.getElementById('modalForm').style.display = "flex";
-}
-
-function tutupModal() {
-    document.getElementById('modalForm').style.display = "none";
-}
-
-// Fungsi Final Kirim ke WhatsApp
-function kirimKeWA() {
-    const nama = document.getElementById('namaPembeli').value;
-    const alamat = document.getElementById('alamatPembeli').value;
-
-    if(nama === "" || alamat === "") {
-        alert("Mohon isi nama dan alamat terlebih dahulu ya!");
-        return;
-    }
-
-    // Ambil data ongkir yang dipilih dari dropdown (jika ada)
-    const wilayahSelect = document.getElementById('pilih-wilayah');
-    const wilayahNama = wilayahSelect ? wilayahSelect.options[wilayahSelect.selectedIndex].text : "-";
-    const ongkir = wilayahSelect ? (parseInt(wilayahSelect.value) || 0) : 0;
-    const total = hargaTerpilih + ongkir;
-
-    let pesan = `Halo Rumah Satwa Hambali,\n\n`;
-    pesan += `*DATA PEMESAN*\n`;
-    pesan += `Nama: ${nama}\n`;
-    pesan += `Alamat: ${alamat}\n\n`;
-    pesan += `*PESANAN*\n`;
-    pesan += `Produk: *${produkTerpilih}*\n`;
-    pesan += `Harga: Rp ${hargaTerpilih.toLocaleString()}\n`;
-    pesan += `Wilayah: ${wilayahNama}\n`;
-    pesan += `Ongkir: Rp ${ongkir.toLocaleString()}\n`;
-    pesan += `--------------------------\n`;
-    pesan += `*Total Bayar: Rp ${total.toLocaleString()}*`;
-
-    window.open("https://wa.me/628123456789?text=" + encodeURIComponent(pesan));
-    tutupModal();
-}
+                <a href="https://wa.me/628123456789?text=Halo%20Rumah%20Satwa%20Hambali,%20saya%20tertarik%20Sapi%20Bali" class="btn" style="width: 100%; text-align: center;">Pesan via WA</a>
             </div>
         </div>
 
