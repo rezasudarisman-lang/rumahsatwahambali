@@ -207,7 +207,7 @@
                     <li><i class="fas fa-file-contract"></i> Sertifikat Kurban Personal</li>
                     <li><i class="fas fa-video"></i> Dokumentasi Penyembelihan</li>
                 </ul>
-                <a href="https://wa.me/628123456789?text=Halo%20Rumah%20Satwa%20Hambali,%20saya%20mau%20ikut%20patungan%20sapi" class="btn" style="width: 100%; text-align: center;">Daftar Patungan</a>
+                <button onclick="pesanWA('Patungan Sapi (1/7)', 2250000)" class="btn" style="width: 100%; border: none; cursor: pointer;">Daftar Patungan</button>
             </div>
         </div>
     </div>
@@ -232,6 +232,54 @@
 <a href="https://wa.me/628123456789" class="wa-float" target="_blank">
     <i class="fab fa-whatsapp"></i>
 </a>
+<script>
+        let produkTerpilih = "";
+        let hargaTerpilih = 0;
 
+        function pesanWA(nama, harga) {
+            produkTerpilih = nama;
+            hargaTerpilih = harga;
+            
+            // Munculkan teks info produk di modal
+            document.getElementById('infoProduk').innerText = "Produk: " + nama;
+            // Tampilkan Modal
+            document.getElementById('modalForm').style.display = "flex";
+        }
+
+        function tutupModal() {
+            document.getElementById('modalForm').style.display = "none";
+        }
+
+        function kirimKeWA() {
+            const nama = document.getElementById('namaPembeli').value;
+            const alamat = document.getElementById('alamatPembeli').value;
+
+            if(nama === "" || alamat === "") {
+                alert("Mohon isi nama dan alamat lengkapnya dulu ya!");
+                return;
+            }
+
+            // Ambil data ongkir dari dropdown jika ada
+            const wilayahSelect = document.getElementById('pilih-wilayah');
+            const wilayahNama = wilayahSelect ? wilayahSelect.options[wilayahSelect.selectedIndex].text : "Tidak dipilih";
+            const ongkir = wilayahSelect ? (parseInt(wilayahSelect.value) || 0) : 0;
+            const total = hargaTerpilih + ongkir;
+
+            let pesan = `Halo Rumah Satwa Hambali,\n\n`;
+            pesan += `*DATA PEMESAN*\n`;
+            pesan += `Nama: ${nama}\n`;
+            pesan += `Alamat: ${alamat}\n\n`;
+            pesan += `*PESANAN*\n`;
+            pesan += `Produk: *${produkTerpilih}*\n`;
+            pesan += `Harga: Rp ${hargaTerpilih.toLocaleString()}\n`;
+            pesan += `Wilayah: ${wilayahNama}\n`;
+            pesan += `Ongkir: Rp ${ongkir.toLocaleString()}\n`;
+            pesan += `--------------------------\n`;
+            pesan += `*Total Bayar: Rp ${total.toLocaleString()}*`;
+
+            window.open("https://wa.me/628123456789?text=" + encodeURIComponent(pesan));
+            tutupModal();
+        }
+    </script>
 </body>
 </html>
